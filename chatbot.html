@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goofy ahh ai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chatbox {
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            border: 1px solid #ccc;
+            margin: 20px auto;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        #chatbox div {
+            margin-bottom: 10px;
+        }
+
+        .user {
+            text-align: right;
+            color: blue;
+        }
+
+        .bot {
+            text-align: left;
+            color: green;
+        }
+
+        #userInput {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+
+        #sendButton {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #sendButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chatbox">
+        <div class="bot">im not ai this was made with premade responses but hi</div>
+    </div>
+
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button id="sendButton">send</button>
+
+    <script>
+        const sendButton = document.getElementById("sendButton");
+        const userInput = document.getElementById("userInput");
+        const chatbox = document.getElementById("chatbox");
+
+        const responses = {
+            "hello": "yo whats up",
+            "hey": "yo whats up",
+            "yo": "yo whats up",
+            "hi": "yo whats up",
+            "how are you": "good how are you",
+            "bye": "bye lil bro",
+            "good": "thats good",
+            "default": "sorry im not trained to understand that, try again"
+        };
+
+        sendButton.addEventListener("click", function() {
+            const userMessage = userInput.value.trim().toLowerCase();
+            if (userMessage) {
+                const userMessageDiv = document.createElement("div");
+                userMessageDiv.classList.add("user");
+                userMessageDiv.textContent = userMessage;
+                chatbox.appendChild(userMessageDiv);
+
+                let botResponse = responses[userMessage] || responses["default"];
+                const botMessageDiv = document.createElement("div");
+                botMessageDiv.classList.add("bot");
+                botMessageDiv.textContent = botResponse;
+                chatbox.appendChild(botMessageDiv);
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+
+                userInput.value = "";
+            }
+        });
+
+        userInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                sendButton.click();
+            }
+        });
+    </script>
+
+</body>
+</html>
