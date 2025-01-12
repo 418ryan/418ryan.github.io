@@ -3,52 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click to Move</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #gameArea {
-            width: 500px;
-            height: 500px;
-            margin: 0 auto;
-            border: 2px solid black;
-            background-color: lightgray;
-            position: relative;
-            overflow: hidden;
-        }
-        #player {
-            width: 30px;
-            height: 30px;
-            background-color: blue;
-            position: absolute;
-            border-radius: 50%;
-        }
-    </style>
+    <title>welcome to my website</title>
 </head>
 <body>
-    <h1>Click to Move Game</h1>
-    <div id="gameArea" onclick="movePlayer(event)">
-        <div id="player"></div>
-    </div>
-
-    <script>
-        function movePlayer(event) {
-            const player = document.getElementById("player");
-            const gameArea = document.getElementById("gameArea");
-            const gameRect = gameArea.getBoundingClientRect();
-
-            // Get the click position relative to the game area
-            const x = event.clientX - gameRect.left - player.offsetWidth / 2;
-            const y = event.clientY - gameRect.top - player.offsetHeight / 2;
-
-            // Keep player inside game area
-            const maxX = gameArea.offsetWidth - player.offsetWidth;
-            const maxY = gameArea.offsetHeight - player.offsetHeight;
-            player.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
-            player.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
-        }
-    </script>
+    <h1>418ryan.github.io</h1>
+    <p>this is a cool website i made with html</p>
 </body>
 </html>
