@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Image Viewer</title>
+</head>
+<body>
+    <h1>welcome to the goofy ahh website</h1>
+    <p>click the button for a random goofy ahh image</p>
+    <button id="load-image">image generator</button>
+
+    <div id="image-container">
+        <img id="random-image" src="https://via.placeholder.com/500x300" alt="Random Image">
+    </div>
+
+    <script>
+        const images = [
+            "https://www.pinterest.com/pin/1083467622854210831/",
+            "https://www.pinterest.com/pin/1083467622854179752/",
+            "https://www.pinterest.com/pin/1083467622854179307/"
+        ];
+
+        const button = document.getElementById("load-image");
+        const img = document.getElementById("random-image");
+
+        button.addEventListener("click", function() {
+            const randomIndex = Math.floor(Math.random() * images.length);
+            img.src = images[randomIndex];
+        });
+    </script>
+</body>
+</html>
