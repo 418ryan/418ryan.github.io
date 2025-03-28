@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtube downloader</title>
+</head>
+<body>
+    <h2>download youtube videos</h2>
+    <input type="text" id="videoUrl" placeholder="enter video url">
+    <p style="font-size: 0.9em; color: gray;">
+        note: this the site used to download videos isnt affiliated with me
+    </p>
+    <button onclick="downloadVideo()">download</button>
+    <script>
+        function downloadVideo() {
+            let url = document.getElementById('videoUrl').value;
+            if (!url.includes("youtube.com") && !url.includes("youtu.be")) {
+                alert("url isnt working, try again");
+                return;
+            }
+            window.location.href = `https://www.y2mate.com/youtube/${extractVideoID(url)}`;
+        }
+
+        function extractVideoID(url) {
+            let match = url.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
+            return match ? match[1] : "";
+        }
+    </script>
+</body>
+</html>
