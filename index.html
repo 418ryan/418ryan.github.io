@@ -1,15 +1,43 @@
-<!-- have a nice day :) -->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ryan's Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Does My Monitor Work?</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00FF00;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-size: 4em;
+      flex-direction: column;
+    }
+    .dot {
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    .footer {
+      font-size: 0.5em;
+      color: #444;
+      position: absolute;
+      bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-
-<p>Thanks for visiting my website</p>
-<p><a href="html.html">html stuff</a></p>
-<p><a href="characters.html">unicode characters</a></p>
-
+  <div>
+    Yes<span class="dot">.</span>
+  </div>
+  <div class="footer">
+    If you see this, your monitor works!
+  </div>
 </body>
 </html>
