@@ -16,6 +16,7 @@
       margin: 0;
       font-size: 4em;
       flex-direction: column;
+      position: relative;
     }
     .dot {
       animation: blink 1s infinite;
@@ -30,14 +31,40 @@
       position: absolute;
       bottom: 10px;
     }
+    .loading-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #00FF00;
+      font-size: 1em;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <div>
+  <div class="loading-screen" id="loading-screen">
+    Loading...
+  </div>
+  <div id="monitor-message" class="hidden">
     Yes<span class="dot">.</span>
   </div>
   <div class="footer">
-    If you see this, your monitor works!
+    If you see this, your monitor works.
   </div>
+
+  <script>
+    setTimeout(function() {
+      document.getElementById("loading-screen").style.display = "none";
+      document.getElementById("monitor-message").style.display = "block";
+    }, 1000);
+  </script>
 </body>
 </html>
