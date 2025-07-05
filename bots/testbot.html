@@ -41,6 +41,7 @@
     background-color: #222;
     padding: 20px;
     overflow-y: auto;
+    word-wrap: break-word;
   }
 
   .message {
@@ -49,6 +50,8 @@
     margin: 8px 0;
     border-radius: 20px;
     line-height: 1.4;
+    word-break: break-word;
+    white-space: pre-wrap;
   }
 
   .user {
@@ -106,8 +109,7 @@
 
 <header>TestBot</header>
 
-<div id="chat-container">
-</div>
+<div id="chat-container"></div>
 
 <div id="input-area">
   <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" />
@@ -126,6 +128,8 @@
     "help": "Sure! Ask me anything or say 'hello'."
   };
 
+  let lastMessageTime = 0;
+
   function appendMessage(text, className) {
     const msgDiv = document.createElement('div');
     msgDiv.className = 'message ' + className;
@@ -143,16 +147,23 @@
   }
 
   function sendMessage() {
+    const now = Date.now();
     const message = userInput.value.trim();
     if (!message) return;
 
+    if (now - lastMessageTime < 2500) {
+      appendMessage("Please wait before sending another message.", 'bot');
+      return;
+    }
+
+    lastMessageTime = now;
     appendMessage(message, 'user');
     userInput.value = '';
 
     setTimeout(() => {
       const reply = botReply(message);
       appendMessage(reply, 'bot');
-    }, 500);
+    }, 250);
   }
 
   sendBtn.addEventListener('click', sendMessage);
@@ -165,3 +176,4 @@
 
 </body>
 </html>
+
