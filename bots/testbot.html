@@ -1,1 +1,167 @@
+<!DOCTYPE html> <!-- note: we should definitely edit this later, add openai api instead of premade responses -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ECHO AI - TestBot</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0;
+    height: 100%;
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
 
+  header {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 50px;
+    background-color: #1e1e1e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    z-index: 10;
+    color: #00ffa3;
+    user-select: none;
+  }
+
+  #chat-container {
+    margin-top: 50px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #222;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .message {
+    max-width: 70%;
+    padding: 10px 16px;
+    margin: 8px 0;
+    border-radius: 20px;
+    line-height: 1.4;
+  }
+
+  .user {
+    background-color: #00ffa3;
+    color: #121212;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+  }
+
+  .bot {
+    background-color: #333;
+    color: #e0e0e0;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+  }
+
+  #input-area {
+    display: flex;
+    padding: 10px 20px;
+    background-color: #1e1e1e;
+    border-top: 1px solid #333;
+  }
+
+  #user-input {
+    flex: 1;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    background-color: #121212;
+    color: #e0e0e0;
+    box-shadow: inset 0 0 5px #00ffa3;
+  }
+
+  #send-btn {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #00ffa3;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #121212;
+    box-shadow: 0 0 8px #00ffa3;
+    transition: box-shadow 0.3s ease;
+  }
+
+  #send-btn:hover {
+    box-shadow: 0 0 20px #00ffa3;
+  }
+</style>
+</head>
+<body>
+
+<header>TestBot</header>
+
+<div id="chat-container">
+</div>
+
+<div id="input-area">
+  <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off" />
+  <button id="send-btn">Send</button>
+</div>
+
+<script>
+  const chatContainer = document.getElementById('chat-container');
+  const userInput = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+
+  const botResponses = {
+    "hello": "Hi! How can I assist you today?",
+    "hi": "Hi! How can I assist you today?",
+    "how are you?": "I'm doing good :) how are you?",
+    "help": "Sure! Ask me anything or say 'hello'."
+  };
+
+  function appendMessage(text, className) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message ' + className;
+    msgDiv.textContent = text;
+    chatContainer.appendChild(msgDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+
+  function botReply(userMsg) {
+    const key = userMsg.trim().toLowerCase();
+    if (botResponses.hasOwnProperty(key)) {
+      return botResponses[key];
+    }
+    return "Can't generate response :( this will change once API is added";
+  }
+
+  function sendMessage() {
+    const message = userInput.value.trim();
+    if (!message) return;
+
+    appendMessage(message, 'user');
+    userInput.value = '';
+
+    setTimeout(() => {
+      const reply = botReply(message);
+      appendMessage(reply, 'bot');
+    }, 500);
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  userInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  appendMessage("Hello! I'm TestBot. Try saying 'hello' or 'help'.", 'bot');
+</script>
+
+</body>
+</html>
